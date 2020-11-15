@@ -64,28 +64,32 @@ class Search extends Component<PropsType,StateType>{
 
     render(){
         return(
-            <>
-                <Label htmlFor='makeSelect'>Make</Label>
-                <Input id="makeSelect" type='select' onChange={this.makeChange} value={this.state.make}>
-                    <option value='--all--'>--All--</option>
-                    {Object.keys(CARS).map(make => {
-                        return <option value={make}>{make}</option>
-                    })}
-                </Input>
-                <Label htmlFor='modelSelect'>Model</Label>
-                <Input id="modelSelect" type='select' onChange={e => {
-                    this.setState({model:e.target.value})
-                    this.props.setMake(this.state.make)
-                    this.props.setModel(e.target.value)
-                    }} value={this.state.model}>
+            <div id="carSelect">
+                <div>
+                    <Label htmlFor='makeSelect'>Make</Label>
+                    <Input id="makeSelect" type='select' onChange={this.makeChange} value={this.state.make}>
                         <option value='--all--'>--All--</option>
-                    {(this.state.make !== '--all--') ? (
-                        CARS[this.state.make].map((model:any) => {
-                            return <option value={model}>{model}</option>
-                        })
-                     ) : null}
-                </Input>
-            </>
+                        {Object.keys(CARS).map(make => {
+                            return <option value={make}>{make}</option>
+                        })}
+                    </Input>
+                </div>
+                <div>
+                    <Label htmlFor='modelSelect'>Model</Label>
+                    <Input id="modelSelect" type='select' onChange={e => {
+                        this.setState({model:e.target.value})
+                        this.props.setMake(this.state.make)
+                        this.props.setModel(e.target.value)
+                        }} value={this.state.model}>
+                            <option value='--all--'>--All--</option>
+                        {(this.state.make !== '--all--') ? (
+                            CARS[this.state.make].sort().map((model:any) => {
+                                return <option value={model}>{model}</option>
+                            })
+                        ) : null}
+                    </Input>
+                </div>
+            </div>
         )
     }
 }
