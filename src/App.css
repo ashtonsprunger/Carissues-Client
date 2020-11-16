@@ -1,4 +1,78 @@
-#carSelect {
+#wrapper {
+  /* display: grid;
+  grid-template-columns: 1fr 2fr; */
+}
+
+#authWrapper {
+  /* height: fit-content;s */
+  width: 33%;
+  position: fixed;
+  /* background-color: green; */
+}
+
+#issuesWrapper {
+  margin-left: 33vw;
+}
+
+.carSelect {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr 1fr 0.3fr;
+  grid-gap: 0.5em;
+}
+
+.carSelectButton {
+  /* height: 50%; */
+  width: 100%;
+}
+
+.issueCard {
+  margin-top: 1em;
+  padding: 1em;
+}
+
+.issueTitle {
+  font-size: larger;
+  font-weight: bold;
+}
+
+.issueSubtitle {
+  font-style: italic;
+  color: blue;
+}
+
+.issueBody {
+  padding: 0;
+  background-color: lightgrey;
+  border: 1px solid grey;
+  border-radius: 4px;
+}
+
+.issueBody p {
+  margin: 0.5em;
+}
+
+.fixCard {
+  margin-top: 1em;
+  color: white;
+}
+
+.noFixes {
+  color: red;
+  margin: 12px 0 0;
+}
+
+.expandFixes {
+  user-select: none;
+  width: fit-content;
+  cursor: pointer;
+  color: rgb(0, 184, 0);
+  margin: 12px 0 0;
+}
+
+.expandFixes:hover {
+  color: rgb(0, 184, 0);
+}
+
+#issuesWrapper {
+  padding: 1em 2em;
 }

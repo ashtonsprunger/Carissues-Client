@@ -6,13 +6,13 @@ import Search from './Search'
 
 type StateType = {
   results: any,
-  token: string | null,
+  token: string,
   make: string,
   model: string
 }
 
 type PropsType = {
-
+  token: string
 }
 
 class App extends Component<PropsType, StateType>{
@@ -22,7 +22,7 @@ class App extends Component<PropsType, StateType>{
       results: [],
       make: '--all--',
       model: '--all--',
-      token: null
+      token: this.props.token
     }
     this.setTheMake = this.setTheMake.bind(this)
     this.setTheModel = this.setTheModel.bind(this)
@@ -70,15 +70,19 @@ class App extends Component<PropsType, StateType>{
 
   render(){
     return(
-      <>
+      <div id='issuesWrapper'>
         <Form onSubmit={this.handleSubmit}>
-          <FormGroup>
+          <FormGroup className='carSelect'>
             <Search setMake={this.setTheMake} setModel={this.setTheModel}/>
+            <div>
+              <label htmlFor="issueCarSelectButton">‏‏‎ ‎‎‎</label>
+              <Button id='issueCarSelectButton' className='carSelectButton' type='submit' color='warning'>Search!</Button>
+            </div>
           </FormGroup>
-          <Button type='submit' color='warning'>Search!</Button>
         </Form>
+        <hr/>
         <Results results={this.state.results} />
-      </>
+      </div>
     )
   }
 }

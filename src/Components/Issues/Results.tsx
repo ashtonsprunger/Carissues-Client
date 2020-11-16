@@ -7,8 +7,8 @@ type PropsType = {
 
 type StateType = {
     results: any,
-    fixesAreOpen: boolean,
-    fixText: string
+    fixesAreOpen: any,
+    fixesText: any
 }
 
 class Welcome extends Component<PropsType, StateType>{
@@ -16,17 +16,34 @@ class Welcome extends Component<PropsType, StateType>{
         super(props)
         this.state = {
             results: props.results,
-            fixesAreOpen: false,
-            fixText: 'expand fixes'
+            fixesAreOpen: {},
+            fixesText: {}
         }
         this.toggleFix = this.toggleFix.bind(this)
     }
 
-    toggleFix(){
+    toggleFix(e: any){
+        let buttonId = e.target.id;
+        this.state.fixesAreOpen[buttonId] = !this.state.fixesAreOpen[buttonId];
+
+
+        
+        // this.state.fixesAreOpen[buttonId] ? this.setState({fixesText: 'close fixes ↑'}) : 'expand fixes ↓';
+        // let fixesTextClone = this.state.fixesText;
+        // fixesTextClone[buttonId] = newFixText
+        // console.log(fixesTextClone)
+
+        // this.state.fixesText[buttonId] = 'close fixes ↑'
+        // console.log(this.state.fixesText)
         this.setState({
-            fixesAreOpen: !this.state.fixesAreOpen,
-            fixText: this.state.fixText === 'expand fixes' ? 'close fixes' : 'expand fixes'
+            fixesAreOpen: this.state.fixesAreOpen,
+            // fixesText: 
         })
+
+        // this.setState({
+        //     fixesText: fixesTextClone
+        // })
+        // console.log(this.state.fixesText)
     }
 
     render(){
@@ -37,21 +54,21 @@ class Welcome extends Component<PropsType, StateType>{
                     this.props.results.length > 0 ? (
                         this.props.results.map((issue:any, index:number) => {
                             return(
-                                <Card className='issueCard'>
-                                    <CardTitle>{issue.title}</CardTitle>
-                                    <CardSubtitle>{`${issue.make}, ${issue.model}`}</CardSubtitle>
-                                    <CardBody>
+                                <Card color='light' className='issueCard'>
+                                    <CardSubtitle className='issueSubtitle'>{`${issue.year} ${issue.make} ${issue.model}`}</CardSubtitle>
+                                    <CardTitle className='issueTitle'>{issue.title}</CardTitle>
+                                    <body className='issueBody'>
                                         <p>{issue.issue}</p>
-                                    </CardBody>
-                                    {
-                                        issue.fixes.length > 0 ? (
+                                    </body>
+                                    <p hidden>{this.state.fixesText[`index:${index}`] = 'expand fixes ↓'}</p>
+                                        {issue.fixes.length > 0 ? (
                                             <>
-                                                <Button onClick={this.toggleFix}>{this.state.fixText}</Button>
-                                                <Collapse isOpen={this.state.fixesAreOpen}>
+                                                <a className='expandFixes' id={`index:${index}`} onClick={this.toggleFix}>fixes ↓↑</a>
+                                                <Collapse isOpen={this.state.fixesAreOpen[`index:${index}`]}>
                                                     {
                                                         issue.fixes.map((fix:any) => {
                                                             return(
-                                                                <Card className='fixCard'>
+                                                                <Card color='dark' className='fixCard'>
                                                                     <CardBody>{fix.fix}</CardBody>
                                                                 </Card>
                                                             )
@@ -59,7 +76,7 @@ class Welcome extends Component<PropsType, StateType>{
                                                     }
                                                 </Collapse>
                                             </>
-                                        ) : <p>No fixes yet :(</p>
+                                        ) : <p className='noFixes'>No fixes yet :(</p>
                                     }
                                 </Card>
                             )

@@ -64,7 +64,7 @@ class Search extends Component<PropsType,StateType>{
 
     render(){
         return(
-            <div id="carSelect">
+            <>
                 <div>
                     <Label htmlFor='makeSelect'>Make</Label>
                     <Input id="makeSelect" type='select' onChange={this.makeChange} value={this.state.make}>
@@ -89,7 +89,7 @@ class Search extends Component<PropsType,StateType>{
                         ) : null}
                     </Input>
                 </div>
-            </div>
+            </>
         )
     }
 }
