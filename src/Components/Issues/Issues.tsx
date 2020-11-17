@@ -4,6 +4,7 @@ import { Button, Form, FormGroup } from 'reactstrap';
 import Results from './Results';
 import Search from './Search';
 import PostIssue from './PostIssue';
+console.log('hi')
 
 type StateType = {
   results: any,
