@@ -38,6 +38,9 @@
 .issueSubtitle {
   font-style: italic;
   color: blue;
+  display: flex;
+  justify-content: space-between;
+  /* margin-bottom: 0; */
 }
 
 .issueBody {

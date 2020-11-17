@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup } from 'reactstrap';
 
-import Results from './Results'
-import Search from './Search'
+import Results from './Results';
+import Search from './Search';
+import PostIssue from './PostIssue';
 
 type StateType = {
   results: any,
@@ -73,15 +74,16 @@ class App extends Component<PropsType, StateType>{
       <div id='issuesWrapper'>
         <Form onSubmit={this.handleSubmit}>
           <FormGroup className='carSelect'>
-            <Search setMake={this.setTheMake} setModel={this.setTheModel}/>
+            <Search startMake='--all--' startModel='--all--' allowAll={true} setMake={this.setTheMake} setModel={this.setTheModel}/>
             <div>
               <label htmlFor="issueCarSelectButton">‏‏‎ ‎‎‎</label>
               <Button id='issueCarSelectButton' className='carSelectButton' type='submit' color='warning'>Search!</Button>
             </div>
           </FormGroup>
         </Form>
+        <PostIssue make={this.state.make} model={this.state.model} token={this.props.token}/>
         <hr/>
-        <Results results={this.state.results} />
+        <Results token={this.props.token} results={this.state.results} />
       </div>
     )
   }

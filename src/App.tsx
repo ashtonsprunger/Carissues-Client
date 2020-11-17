@@ -6,7 +6,8 @@ import Issues from './Components/Issues/Issues';
 import Auth from './Components/Auth/Auth';
 
 type StateType = {
-  token: any
+  token: any,
+  user: any
 }
 
 type PropsType = {
@@ -17,14 +18,30 @@ class App extends Component<PropsType, StateType>{
   constructor(props:PropsType){
     super(props)
     this.state = {
-      token: ''
+      token: '',
+      user: null
     }
-    this.setToken = this.setToken.bind(this)
+    this.setToken = this.setToken.bind(this);
+    this.getToken = this.getToken.bind(this);
+    this.getUser = this.getUser.bind(this);
   }
 
   componentWillMount(){
-    console.log('TOKEN')
-    this.getToken()
+    console.log('TOKEN');
+    this.getToken();
+  }
+
+  getUser(token: string){
+    fetch('https://carissues-server.herokuapp.com/api/auth/user', {
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        Authorization: token
+      })
+    }).then(res => res.json()).then(json => {
+      console.log('USER:', json)
+    }).catch(error => {
+      console.log('ERROR:', error)
+    })
   }
 
   getToken(){
@@ -40,6 +57,7 @@ class App extends Component<PropsType, StateType>{
     this.setState({
       token: token
     })
+    this.getUser(this.state.token)
   }
 
   render(){

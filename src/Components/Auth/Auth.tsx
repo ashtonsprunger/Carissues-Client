@@ -40,6 +40,7 @@ class Auth extends Component<PropsType,StateType>{
         console.log(this)
         return(
             <div id='authWrapper'>
+                <h1>Carissues</h1>
                 {this.props.token ? (<h1>yes</h1>) : (<h1>no</h1>)}
                 <Login setToken={this.props.setToken} token={this.props.token}/>
                 <Register setToken={this.props.setToken} token={this.props.token}/>

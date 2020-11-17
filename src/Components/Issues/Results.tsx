@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { Button, Card, CardBody, CardSubtitle, CardTitle, Collapse } from 'reactstrap'
+import { Button, Card, CardBody, CardSubtitle, CardTitle, Collapse } from 'reactstrap';
+
+import UpdateIssue from './UpdateIssue'
 
 type PropsType = {
-    results: any
+    results: any,
+    token: string
 }
 
 type StateType = {
@@ -55,8 +58,10 @@ class Welcome extends Component<PropsType, StateType>{
                         this.props.results.map((issue:any, index:number) => {
                             return(
                                 <Card color='light' className='issueCard'>
-                                    <CardSubtitle className='issueSubtitle'>{`${issue.year} ${issue.make} ${issue.model}`}</CardSubtitle>
+                                    <div className='issueSubtitle'><span>{`${issue.year ? issue.year : ''} ${issue.make} ${issue.model}`}</span><span>{issue.user.name} (you) ✎</span></div>
+                                    
                                     <CardTitle className='issueTitle'>{issue.title}</CardTitle>
+                                    {/* <UpdateIssue token={this.props.token} make={issue.make} model={issue.model} year={issue.year} title={issue.title} issue={issue.issue} id={issue.id}/> */}
                                     <body className='issueBody'>
                                         <p>{issue.issue}</p>
                                     </body>

@@ -6,6 +6,9 @@ const CARS = require('../../Assets/cars.json')
 type PropsType = {
     setMake: (make:any) => any;
     setModel: (model:any) => any;
+    allowAll: boolean;
+    startMake: string;
+    startModel: string;
 }
 
 type StateType = {
@@ -17,21 +20,58 @@ type StateType = {
 class Search extends Component<PropsType,StateType>{
     constructor(props:PropsType){
         super(props)
-        this.state = {
-            make: '--all--',
-            model: '--all--',
-            cars: CARS
+        if(this.props.allowAll){
+            this.state = {
+                make: '--all--',
+                model: '--all--',
+                cars: CARS
+            }
+        }else{
+            if(this.props.startMake === '--all--'){
+                this.state = {
+                    make: 'Acura',
+                    model: 'CL',
+                    cars: CARS
+                }
+            }else{
+                this.state = {
+                    make: this.props.startMake,
+                    model: this.props.startModel,
+                    cars: CARS
+                }
+            }
+            if(this.props.startModel === '--all--'){
+                this.state = {
+                    make: this.state.make,
+                    model: CARS[this.state.make][0],
+                    cars: CARS
+                }
+            }
         }
         this.makeChange = this.makeChange.bind(this)
     }
 
+    componentWillMount(){
+        this.props.setMake(this.state.make);
+        this.props.setModel(this.state.model);
+    }
+
     makeChange(e:any){
-        this.setState({
-            make: e.target.value,
-            model: '--all--'
-        })
-        this.props.setMake(e.target.value)
-        this.props.setModel('--all--')
+        if(this.props.allowAll){
+            this.setState({
+                make: e.target.value,
+                model: '--all--'
+            })
+            this.props.setMake(e.target.value)
+            this.props.setModel('--all--')
+        }else{
+            this.setState({
+                make: e.target.value,
+                model: CARS[e.target.value][0]
+            })
+            this.props.setMake(e.target.value)
+            this.props.setModel(CARS[e.target.value][0])
+        }
     }
 
     // componentDidUpdate(){
@@ -68,7 +108,7 @@ class Search extends Component<PropsType,StateType>{
                 <div>
                     <Label htmlFor='makeSelect'>Make</Label>
                     <Input id="makeSelect" type='select' onChange={this.makeChange} value={this.state.make}>
-                        <option value='--all--'>--All--</option>
+                        {this.props.allowAll ? (<option value='--all--'>--All--</option>) : null}
                         {Object.keys(CARS).map(make => {
                             return <option value={make}>{make}</option>
                         })}
@@ -81,7 +121,7 @@ class Search extends Component<PropsType,StateType>{
                         this.props.setMake(this.state.make)
                         this.props.setModel(e.target.value)
                         }} value={this.state.model}>
-                            <option value='--all--'>--All--</option>
+                            {this.props.allowAll ? (<option value='--all--'>--All--</option>) : null}
                         {(this.state.make !== '--all--') ? (
                             CARS[this.state.make].sort().map((model:any) => {
                                 return <option value={model}>{model}</option>

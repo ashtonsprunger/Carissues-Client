@@ -6,7 +6,11 @@ import Search from './Search';
 type PropsType = {
     make: string,
     model: string,
-    token: string
+    year: string,
+    title: string,
+    issue: string
+    token: string,
+    id: number,
 }
 
 type StateType = {
@@ -19,7 +23,7 @@ type StateType = {
     thisYear: string
 }
 
-class PostIssue extends Component<PropsType, StateType>{
+class UpdateIssue extends Component<PropsType, StateType>{
     constructor(props: PropsType){
         super(props);
         let today = new Date();
@@ -27,9 +31,9 @@ class PostIssue extends Component<PropsType, StateType>{
         this.state = {
             make: this.props.make,
             model: this.props.model,
-            year: '',
-            title: '',
-            issue: '',
+            year: this.props.year,
+            title: this.props.title,
+            issue: this.props.issue,
             isOpen: false,
             thisYear: year.toString()
         }
@@ -50,11 +54,13 @@ class PostIssue extends Component<PropsType, StateType>{
 
     handleSubmit(e: any){
         e.preventDefault()
-        let url = `https://carissues-server.herokuapp.com/api/auth/${this.state.make}/${this.state.model}`;
+        let url = `https://carissues-server.herokuapp.com/api/auth/${this.props.id}`;
         console.log(url)
         fetch(url, {
-            method: 'POST',
+            method: 'PUT',
             body: JSON.stringify({
+                make: this.state.make,
+                model: this.state.model,
                 title: this.state.title,
                 issue: this.state.issue,
                 year: this.state.year ? this.state.year : null
@@ -72,9 +78,9 @@ class PostIssue extends Component<PropsType, StateType>{
     render(){
         return(
             <>
-                <Button onClick={() => this.setState({isOpen:true})}>Post an Issue</Button>
+                <Button onClick={() => this.setState({isOpen:true})}>Edit</Button>
                 <Modal isOpen={this.state.isOpen}>
-                    <ModalHeader>Post issue</ModalHeader>
+                    <ModalHeader>Edit issue</ModalHeader>
                     <ModalBody>
                         <Form onSubmit={this.handleSubmit}>
                             <FormGroup>
@@ -101,4 +107,4 @@ class PostIssue extends Component<PropsType, StateType>{
     }
 }
 
-export default PostIssue;
+export default UpdateIssue;
