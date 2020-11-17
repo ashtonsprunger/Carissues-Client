@@ -3,7 +3,7 @@ import { Button, Form, FormGroup } from 'reactstrap';
 
 import Results from './Results';
 import Search from './Search';
-import PostIssue from './PostIssue'
+import PostIssue from './PostIssue';
 
 type StateType = {
   results: any,
