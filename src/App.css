@@ -74,3 +74,14 @@
 #issuesWrapper {
   padding: 1em 2em;
 }
+
+.editButton {
+  cursor: pointer;
+  color: red;
+  text-decoration: underline;
+}
+
+.editButton:hover {
+  color: red;
+  text-decoration: none;
+}
