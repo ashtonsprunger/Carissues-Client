@@ -2,48 +2,83 @@ import React, { Component } from "react";
 
 import Login from "./login";
 import Register from "./register";
+import Logout from "./Logout";
+import Results from "../Issues/Results";
 
 type PropsType = {
   token: any;
   setToken: (token: string) => void;
+  user: any;
 };
 
 type StateType = {
   // registerOpen: boolean,
   // loginOpen: boolean
+  results: Array<object>;
 };
 
 class Auth extends Component<PropsType, StateType> {
   constructor(props: PropsType) {
     super(props);
     this.state = {
-      registerOpen: false,
-      loginOpen: false,
+      results: [],
     };
-    this.setRegisterOpen = this.setRegisterOpen.bind(this);
-    this.setLoginOpen = this.setLoginOpen.bind(this);
+    this.deleteToken = this.deleteToken.bind(this);
   }
 
-  setRegisterOpen(isOpen: boolean) {
-    this.setState({
-      registerOpen: isOpen,
-    });
+  deleteToken() {
+    this.props.setToken("");
+    localStorage.clear();
   }
 
-  setLoginOpen(isOpen: boolean) {
-    this.setState({
-      loginOpen: isOpen,
-    });
+  componentWillMount() {
+    this.fetchResults();
+  }
+
+  fetchResults() {
+    let url = "https://carissues-server.herokuapp.com/api/auth";
+    fetch(url, {
+      headers: new Headers({
+        Authorization: this.props.token,
+      }),
+    })
+      .then((res) => res.json())
+      .then((json) => this.setState({ results: json }));
   }
 
   render() {
     console.log(this);
     return (
       <div id="authWrapper">
-        <h1>Carissues</h1>
-        {this.props.token ? <h1>yes</h1> : <h1>no</h1>}
-        <Login setToken={this.props.setToken} token={this.props.token} />
-        <Register setToken={this.props.setToken} token={this.props.token} />
+        <h1 id="mainLogo">Carissues</h1>
+        <div id="authContent">
+          {this.props.token ? (
+            <>
+              {this.props.user
+                ? `currently logged in as ${this.props.user.name} ${
+                    this.props.user.admin ? "(admin)" : ""
+                  } `
+                : null}
+              <Logout deleteToken={this.deleteToken} />
+              <h3>Your Issues:</h3>
+              <Results
+                showUser={false}
+                fetchResults={this.fetchResults}
+                token={this.props.token}
+                user={this.props.user}
+                results={this.state.results}
+              />
+            </>
+          ) : (
+            <>
+              <Login setToken={this.props.setToken} token={this.props.token} />
+              <Register
+                setToken={this.props.setToken}
+                token={this.props.token}
+              />
+            </>
+          )}
+        </div>
       </div>
     );
   }

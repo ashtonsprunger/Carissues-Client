@@ -66,7 +66,11 @@ class App extends Component<PropsType, StateType> {
   render() {
     return (
       <div id="wrapper">
-        <Auth token={this.state.token} setToken={this.setToken} />
+        <Auth
+          user={this.state.user}
+          token={this.state.token}
+          setToken={this.setToken}
+        />
         <Issues user={this.state.user} token={this.state.token} />
       </div>
     );

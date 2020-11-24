@@ -75,7 +75,7 @@ class UpdateIssue extends Component<PropsType, StateType> {
 
   handleSubmit(e: any) {
     e.preventDefault();
-    let url = `https://carissues-server.herokuapp.com/api/auth/${this.props.id}`;
+    let url = `https://carissues-server.herokuapp.com/api/admin/${this.props.id}`;
     console.log(url);
     console.log("make:", this.state.make);
     console.log("model:", this.state.model);

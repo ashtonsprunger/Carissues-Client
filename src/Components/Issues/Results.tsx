@@ -9,15 +9,24 @@ import {
 } from "reactstrap";
 
 import UpdateIssue from "./UpdateIssue";
+import DeleteIssue from "./DeleteIssue";
+import PostFix from "./PostFix";
+import EditFix from "./EditFix";
+import DeleteFix from "./DeleteFix";
+
+import AdminUpdateIssue from "./AdminUpdateIssue";
+import AdminDeleteIssue from "./AdminDeleteIssue";
 
 type PropsType = {
   results: any;
   token: string;
   user: any;
+  fetchResults: () => void;
+  showUser: boolean;
 };
 
 type StateType = {
-  results: any;
+  results: Array<object>;
   fixesAreOpen: any;
   fixesText: any;
 };
@@ -61,6 +70,13 @@ class Welcome extends Component<PropsType, StateType> {
       <div>
         {this.props.results.length > 0 ? (
           this.props.results.map((issue: any, index: number) => {
+            // if (
+            //   this.props.user &&
+            //   issue.userId == this.props.user.id &&
+            //   this.props.showUser
+            // ) {
+            //   return null;
+            // }
             return (
               <Card color="light" className="issueCard">
                 <div className="issueSubtitle">
@@ -68,11 +84,11 @@ class Welcome extends Component<PropsType, StateType> {
                     issue.model
                   }`}</span>
                   <span>
-                    {issue.user.name}{" "}
+                    {this.props.showUser ? issue.user.name : null}{" "}
                     {this.props.user ? (
                       issue.userId == this.props.user.id ? (
                         <>
-                          (you){" "}
+                          {this.props.showUser ? "(you)" : null}{" "}
                           <UpdateIssue
                             token={this.props.token}
                             make={issue.make}
@@ -81,6 +97,30 @@ class Welcome extends Component<PropsType, StateType> {
                             title={issue.title}
                             issue={issue.issue}
                             id={issue.id}
+                          />{" "}
+                          <DeleteIssue
+                            id={issue.id}
+                            user={this.props.user}
+                            title={issue.title}
+                            token={this.props.token}
+                          />
+                        </>
+                      ) : this.props.user.admin ? (
+                        <>
+                          <AdminUpdateIssue
+                            make={issue.make}
+                            model={issue.model}
+                            year={issue.year}
+                            title={issue.title}
+                            issue={issue.issue}
+                            id={issue.id}
+                            token={this.props.token}
+                          />{" "}
+                          <AdminDeleteIssue
+                            token={this.props.token}
+                            id={issue.id}
+                            user={this.props.user}
+                            title={issue.title}
                           />
                         </>
                       ) : (
@@ -101,19 +141,49 @@ class Welcome extends Component<PropsType, StateType> {
                 </p>
                 {issue.fixes.length > 0 ? (
                   <>
-                    <a
-                      className="expandFixes"
-                      id={`index:${index}`}
-                      onClick={this.toggleFix}
-                    >
-                      fixes ↓↑
-                    </a>
+                    <span className="fixesSpan">
+                      <a
+                        className="linkButton expandFixes"
+                        id={`index:${index}`}
+                        onClick={this.toggleFix}
+                      >
+                        fixes ↓↑
+                      </a>
+                    </span>
                     <Collapse
                       isOpen={this.state.fixesAreOpen[`index:${index}`]}
                     >
+                      {this.props.token ? (
+                        <PostFix
+                          placeholder="have another fix? post it here!"
+                          token={this.props.token}
+                          id={issue.id}
+                        />
+                      ) : null}
                       {issue.fixes.map((fix: any) => {
                         return (
                           <Card color="dark" className="fixCard">
+                            {fix.user.name}
+                            {this.props.user ? (
+                              fix.userId == this.props.user.id ? (
+                                <>
+                                  <EditFix
+                                    fetchResults={this.props.fetchResults}
+                                    token={this.props.token}
+                                    fix={fix.fix}
+                                    id={fix.id}
+                                  />
+                                  <DeleteFix
+                                    id={fix.id}
+                                    fix={fix.fix}
+                                    token={this.props.token}
+                                    user={this.props.user}
+                                  />
+                                </>
+                              ) : (
+                                " not yours"
+                              )
+                            ) : null}
                             <CardBody>{fix.fix}</CardBody>
                           </Card>
                         );
@@ -121,7 +191,16 @@ class Welcome extends Component<PropsType, StateType> {
                     </Collapse>
                   </>
                 ) : (
-                  <p className="noFixes">No fixes yet :(</p>
+                  <>
+                    <p className="noFixes">No fixes yet :(</p>
+                    {this.props.token ? (
+                      <PostFix
+                        placeholder="have a fix? post it here!"
+                        token={this.props.token}
+                        id={issue.id}
+                      />
+                    ) : null}
+                  </>
                 )}
               </Card>
             );

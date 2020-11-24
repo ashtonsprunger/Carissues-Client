@@ -131,7 +131,7 @@ class PostIssue extends Component<PropsType, StateType> {
                   onChange={(e) => this.setState({ issue: e.target.value })}
                 />
               </FormGroup>
-              <Button color="success" type="submit">
+              <Button className="firstButton" color="success" type="submit">
                 Post!
               </Button>
               <Button

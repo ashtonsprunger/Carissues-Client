@@ -1,12 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Grandstander&display=swap");
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
 #authWrapper {
-  /* height: fit-content;s */
   width: 33%;
-  position: fixed;
-  /* background-color: green; */
+  float: left;
+  background-color: rgb(217, 238, 255);
+}
+
+#authContent {
+  padding: 0 1em 1em;
+  margin-top: 95px;
 }
 
 #issuesWrapper {
   margin-left: 33vw;
+  position: relative;
+  top: 0;
+  padding: 1em 1em;
+  background-color: rgb(226, 255, 224);
 }
 
 .carSelect {
@@ -23,6 +38,11 @@
 .issueCard {
   margin-top: 1em;
   padding: 1em;
+  /* -webkit-box-shadow: 0px 2px 13px 0px rgba(0, 0, 0, 0.46); */
+  /* box-shadow: 0px 2px 13px 0px rgba(0, 0, 0, 0.46); */
+  -webkit-box-shadow: 0px 10px 13px -7px #000000,
+    0px 2px 13px 0px rgba(0, 0, 0, 0);
+  box-shadow: 0px 6px 13px -7px #000000, 0px 2px 13px 0px rgba(0, 0, 0, 0);
 }
 
 .issueTitle {
@@ -59,29 +79,58 @@
   margin: 12px 0 0;
 }
 
-.expandFixes {
-  user-select: none;
-  width: fit-content;
+.linkButton {
   cursor: pointer;
+  text-decoration: underline;
+}
+
+.linkButton:hover {
+  text-decoration: none;
+}
+
+#deleteButton {
+  color: red;
+}
+
+.editButton {
+  color: rgb(201, 181, 0);
+}
+.editButton:hover {
+  color: rgb(201, 181, 0);
+}
+
+.firstButton {
+  margin-right: 1em;
+}
+
+.expandFixes {
   color: rgb(0, 184, 0);
-  margin: 12px 0 0;
+  /* width: fit-content; */
+  user-select: none;
 }
 
 .expandFixes:hover {
   color: rgb(0, 184, 0);
 }
 
-#issuesWrapper {
-  padding: 1em 2em;
+.fixesSpan {
+  margin-top: 12px;
 }
 
-.editButton {
-  cursor: pointer;
-  color: red;
-  text-decoration: underline;
+#fixForm {
+  display: flex;
+  margin-top: 12px;
 }
 
-.editButton:hover {
-  color: red;
-  text-decoration: none;
+#mainLogo {
+  text-align: center;
+  padding: 10px 0 0;
+  font-size: 60px;
+  background-color: rgb(255, 198, 132);
+  font-family: "Grandstander", cursive;
+  border-bottom: 6px solid white;
+  position: fixed;
+  width: 33%;
+  z-index: 50;
+  user-select: none;
 }

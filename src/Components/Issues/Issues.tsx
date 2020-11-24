@@ -31,6 +31,7 @@ class App extends Component<PropsType, StateType> {
     this.setTheModel = this.setTheModel.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.setResults = this.setResults.bind(this);
+    this.fetchResults = this.fetchResults.bind(this);
   }
 
   componentWillMount() {
@@ -105,6 +106,8 @@ class App extends Component<PropsType, StateType> {
         />
         <hr />
         <Results
+          showUser={true}
+          fetchResults={this.fetchResults}
           user={this.props.user}
           token={this.props.token}
           results={this.state.results}
