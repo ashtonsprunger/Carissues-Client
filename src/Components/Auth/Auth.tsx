@@ -35,11 +35,16 @@ class Auth extends Component<PropsType, StateType> {
     this.fetchResults();
   }
 
+  componentDidUpdate() {
+    this.fetchResults();
+  }
+
   fetchResults() {
     let url = "https://carissues-server.herokuapp.com/api/auth";
     fetch(url, {
       headers: new Headers({
         Authorization: this.props.token,
+        "Content-Type": "application/json",
       }),
     })
       .then((res) => res.json())
@@ -62,6 +67,7 @@ class Auth extends Component<PropsType, StateType> {
               <Logout deleteToken={this.deleteToken} />
               <h3>Your Issues:</h3>
               <Results
+                showYourIssues={true}
                 showUser={false}
                 fetchResults={this.fetchResults}
                 token={this.props.token}

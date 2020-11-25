@@ -23,6 +23,7 @@ type PropsType = {
   user: any;
   fetchResults: () => void;
   showUser: boolean;
+  showYourIssues: boolean;
 };
 
 type StateType = {
@@ -70,13 +71,13 @@ class Welcome extends Component<PropsType, StateType> {
       <div>
         {this.props.results.length > 0 ? (
           this.props.results.map((issue: any, index: number) => {
-            // if (
-            //   this.props.user &&
-            //   issue.userId == this.props.user.id &&
-            //   this.props.showUser
-            // ) {
-            //   return null;
-            // }
+            if (
+              this.props.user &&
+              issue.userId == this.props.user.id &&
+              !this.props.showYourIssues
+            ) {
+              return null;
+            }
             return (
               <Card color="light" className="issueCard">
                 <div className="issueSubtitle">

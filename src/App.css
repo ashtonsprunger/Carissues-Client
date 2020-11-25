@@ -9,6 +9,11 @@ body {
   width: 33%;
   float: left;
   background-color: rgb(217, 238, 255);
+  /* height: 100vh; */
+  bottom: 0;
+  top: 0;
+  overflow-y: scroll;
+  position: fixed;
 }
 
 #authContent {
@@ -17,7 +22,7 @@ body {
 }
 
 #issuesWrapper {
-  margin-left: 33vw;
+  margin-left: 33%;
   position: relative;
   top: 0;
   padding: 1em 1em;

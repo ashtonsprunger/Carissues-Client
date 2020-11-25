@@ -53,6 +53,7 @@ class App extends Component<PropsType, StateType> {
 
   componentDidUpdate() {
     console.log(this.state.make + "/" + this.state.model);
+    this.fetchResults();
   }
 
   fetchResults() {
@@ -106,6 +107,7 @@ class App extends Component<PropsType, StateType> {
         />
         <hr />
         <Results
+          showYourIssues={false}
           showUser={true}
           fetchResults={this.fetchResults}
           user={this.props.user}
