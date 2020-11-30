@@ -77,11 +77,13 @@ class Auth extends Component<PropsType, StateType> {
             </>
           ) : (
             <>
-              <Login setToken={this.props.setToken} token={this.props.token} />
+              <Login setToken={this.props.setToken} token={this.props.token} />{" "}
+              or{" "}
               <Register
                 setToken={this.props.setToken}
                 token={this.props.token}
-              />
+              />{" "}
+              to post your own issues!
             </>
           )}
         </div>

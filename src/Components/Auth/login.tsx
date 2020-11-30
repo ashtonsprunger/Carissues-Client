@@ -65,13 +65,12 @@ class Login extends Component<PropsType, StateType> {
   render() {
     return (
       <>
-        <Button
-          className="firstButton"
-          color="info"
+        <a
+          className="linkButton"
           onClick={() => this.setState({ isOpen: true })}
         >
           Login
-        </Button>
+        </a>
         <Modal isOpen={this.state.isOpen}>
           <ModalHeader>Login</ModalHeader>
           <ModalBody>

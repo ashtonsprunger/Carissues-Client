@@ -59,9 +59,12 @@ class Register extends Component<PropsType, StateType> {
   render() {
     return (
       <>
-        <Button color="success" onClick={() => this.setState({ isOpen: true })}>
+        <a
+          className="linkButton"
+          onClick={() => this.setState({ isOpen: true })}
+        >
           Register
-        </Button>
+        </a>
         <Modal isOpen={this.state.isOpen}>
           <ModalHeader>Register</ModalHeader>
           <ModalBody>

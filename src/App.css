@@ -27,6 +27,7 @@ body {
   top: 0;
   padding: 1em 1em;
   background-color: rgb(226, 255, 224);
+  min-height: 100vh;
 }
 
 .carSelect {
@@ -138,4 +139,9 @@ body {
   width: 33%;
   z-index: 50;
   user-select: none;
+}
+
+#aboutWrapper {
+  padding: 15px 30px;
+  text-align: center;
 }

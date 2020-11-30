@@ -1,9 +1,11 @@
 import { stringify } from "querystring";
 import React, { Component } from "react";
 import "./App.css";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Issues from "./Components/Issues/Issues";
 import Auth from "./Components/Auth/Auth";
+import About from "./Components/About";
 
 type StateType = {
   token: any;
@@ -27,6 +29,7 @@ class App extends Component<PropsType, StateType> {
   componentWillMount() {
     console.log("TOKEN");
     this.getToken();
+    document.title = "Carissues";
   }
 
   getUser(token: any) {
@@ -65,16 +68,38 @@ class App extends Component<PropsType, StateType> {
 
   render() {
     return (
-      <div id="wrapper">
-        <Auth
-          user={this.state.user}
-          token={this.state.token}
-          setToken={this.setToken}
-        />
-        <Issues user={this.state.user} token={this.state.token} />
-      </div>
+      <Router>
+        <Switch>
+          <Route exact path="/about">
+            <About />
+          </Route>
+          <Route exact path="/">
+            <div id="wrapper">
+              <Auth
+                user={this.state.user}
+                token={this.state.token}
+                setToken={this.setToken}
+              />
+              <Issues user={this.state.user} token={this.state.token} />
+            </div>
+          </Route>
+          <Route>
+            <h1>Oops!! We can't find that page!</h1>
+          </Route>
+        </Switch>
+      </Router>
     );
   }
 }
 
 export default App;
+<div>
+  Icons made by{" "}
+  <a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">
+    Those Icons
+  </a>{" "}
+  from{" "}
+  <a href="https://www.flaticon.com/" title="Flaticon">
+    www.flaticon.com
+  </a>
+</div>;
