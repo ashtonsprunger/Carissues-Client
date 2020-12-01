@@ -51,10 +51,10 @@ class App extends Component<PropsType, StateType> {
     // console.log('model:',this.state.model)
   }
 
-  componentDidUpdate() {
-    console.log(this.state.make + "/" + this.state.model);
-    this.fetchResults();
-  }
+  // componentDidUpdate() {
+  //   console.log(this.state.make + "/" + this.state.model);
+  //   this.fetchResults();
+  // }
 
   fetchResults() {
     let url = "https://carissues-server.herokuapp.com/api/unauth";
@@ -100,11 +100,16 @@ class App extends Component<PropsType, StateType> {
             </div>
           </FormGroup>
         </Form>
-        <PostIssues
-          make={this.state.make}
-          model={this.state.model}
-          token={this.props.token}
-        />
+        {this.props.token ? (
+          <>
+            Don't see what you're looking for?{" "}
+            <PostIssues
+              make={this.state.make}
+              model={this.state.model}
+              token={this.props.token}
+            />
+          </>
+        ) : null}
         <hr />
         <Results
           showYourIssues={false}

@@ -145,3 +145,7 @@ body {
   padding: 15px 30px;
   text-align: center;
 }
+
+#postLink {
+  color: rgb(255, 123, 0);
+}

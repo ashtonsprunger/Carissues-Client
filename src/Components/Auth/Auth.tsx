@@ -52,7 +52,6 @@ class Auth extends Component<PropsType, StateType> {
   }
 
   render() {
-    console.log(this);
     return (
       <div id="authWrapper">
         <h1 id="mainLogo">Carissues</h1>

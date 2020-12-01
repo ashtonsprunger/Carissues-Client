@@ -16,6 +16,7 @@ import DeleteFix from "./DeleteFix";
 
 import AdminUpdateIssue from "./AdminUpdateIssue";
 import AdminDeleteIssue from "./AdminDeleteIssue";
+import AdminUpdateFix from "./AdminFixUpdate";
 
 type PropsType = {
   results: any;
@@ -66,7 +67,7 @@ class Welcome extends Component<PropsType, StateType> {
   }
 
   render() {
-    console.log("Results:", this.props.results);
+    // console.log("Results:", this.props.results);
     return (
       <div>
         {this.props.results.length > 0 ? (
@@ -181,9 +182,14 @@ class Welcome extends Component<PropsType, StateType> {
                                     user={this.props.user}
                                   />
                                 </>
-                              ) : (
-                                " not yours"
-                              )
+                              ) : this.props.user && this.props.user.admin ? (
+                                <AdminUpdateFix
+                                  id={fix.id}
+                                  fix={fix.fix}
+                                  token={this.props.token}
+                                  fetchResults={this.props.fetchResults}
+                                />
+                              ) : null
                             ) : null}
                             <CardBody>{fix.fix}</CardBody>
                           </Card>

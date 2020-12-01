@@ -83,9 +83,13 @@ class PostIssue extends Component<PropsType, StateType> {
   render() {
     return (
       <>
-        <Button onClick={() => this.setState({ isOpen: true })}>
-          Post an Issue
-        </Button>
+        <a
+          className="linkButton"
+          id="postLink"
+          onClick={() => this.setState({ isOpen: true })}
+        >
+          Post an issue
+        </a>
         <Modal isOpen={this.state.isOpen}>
           <ModalHeader>Post issue</ModalHeader>
           <ModalBody>
