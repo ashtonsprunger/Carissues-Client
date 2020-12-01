@@ -35,9 +35,9 @@ class Auth extends Component<PropsType, StateType> {
     this.fetchResults();
   }
 
-  componentDidUpdate() {
-    this.fetchResults();
-  }
+  // componentDidUpdate() {
+  //   this.fetchResults();
+  // }
 
   fetchResults() {
     let url = "https://carissues-server.herokuapp.com/api/auth";
