@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 import Login from "./login";
 import Register from "./register";
@@ -54,7 +55,9 @@ class Auth extends Component<PropsType, StateType> {
   render() {
     return (
       <div id="authWrapper">
-        <h1 id="mainLogo">Carissues</h1>
+        <Link id="mainLogo" to="/about">
+          Carissues
+        </Link>
         <div id="authContent">
           {this.props.token ? (
             <>

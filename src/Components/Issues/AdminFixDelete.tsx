@@ -22,7 +22,7 @@ class DeleteFix extends Component<PropsType, StateType> {
   }
 
   handleSubmit() {
-    let url = `https://carissues-server.herokuapp.com/api/auth/fixes/${this.props.id}`;
+    let url = `https://carissues-server.herokuapp.com/api/admin/fixes/${this.props.id}`;
     fetch(url, {
       method: "DELETE",
       headers: new Headers({

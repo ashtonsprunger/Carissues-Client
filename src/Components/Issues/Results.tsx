@@ -17,6 +17,7 @@ import DeleteFix from "./DeleteFix";
 import AdminUpdateIssue from "./AdminUpdateIssue";
 import AdminDeleteIssue from "./AdminDeleteIssue";
 import AdminUpdateFix from "./AdminFixUpdate";
+import AdminDeleteFix from "./AdminFixDelete";
 
 type PropsType = {
   results: any;
@@ -166,6 +167,9 @@ class Welcome extends Component<PropsType, StateType> {
                         return (
                           <Card color="dark" className="fixCard">
                             {fix.user.name}
+                            {this.props.user && fix.userId == this.props.user.id
+                              ? " (you)"
+                              : null}
                             {this.props.user ? (
                               fix.userId == this.props.user.id ? (
                                 <>
@@ -183,12 +187,20 @@ class Welcome extends Component<PropsType, StateType> {
                                   />
                                 </>
                               ) : this.props.user && this.props.user.admin ? (
-                                <AdminUpdateFix
-                                  id={fix.id}
-                                  fix={fix.fix}
-                                  token={this.props.token}
-                                  fetchResults={this.props.fetchResults}
-                                />
+                                <>
+                                  <AdminUpdateFix
+                                    id={fix.id}
+                                    fix={fix.fix}
+                                    token={this.props.token}
+                                    fetchResults={this.props.fetchResults}
+                                  />
+                                  <AdminDeleteFix
+                                    id={fix.id}
+                                    user={this.props.user}
+                                    token={this.props.token}
+                                    fix={fix.fix}
+                                  />
+                                </>
                               ) : null
                             ) : null}
                             <CardBody>{fix.fix}</CardBody>
