@@ -13,6 +13,7 @@ import {
 type PropsType = {
   token: any;
   setToken: (token: any) => void;
+  fetchResults: () => void;
 };
 
 type StateType = {
@@ -53,6 +54,7 @@ class Register extends Component<PropsType, StateType> {
         this.props.setToken(json.token);
         this.setState({ isOpen: false });
       })
+      .then(this.props.fetchResults)
       .catch(() => alert("Email already in use!"));
   }
 

@@ -74,6 +74,7 @@ class Welcome extends Component<PropsType, StateType> {
         {this.props.results.length > 0 ? (
           this.props.results.map((issue: any, index: number) => {
             if (
+              this.props.token &&
               this.props.user &&
               issue.userId == this.props.user.id &&
               !this.props.showYourIssues

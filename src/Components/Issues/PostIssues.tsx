@@ -36,7 +36,7 @@ class PostIssue extends Component<PropsType, StateType> {
     this.state = {
       make: this.props.make,
       model: this.props.model,
-      year: "",
+      year: String(year),
       title: "",
       issue: "",
       isOpen: false,

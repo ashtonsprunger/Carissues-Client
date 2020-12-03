@@ -13,6 +13,7 @@ import {
 type PropsType = {
   token: any;
   setToken: (token: any) => void;
+  fetchResults: () => void;
 };
 
 type StateType = {
@@ -58,7 +59,7 @@ class Login extends Component<PropsType, StateType> {
           alert("Incorrect username or password! 1");
         }
       })
-      // .then(this.props.fetchResults)
+      .then(this.props.fetchResults)
       .catch(() => alert("Incorrect username or password! 2"));
   }
 
