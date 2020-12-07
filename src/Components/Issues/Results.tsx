@@ -73,22 +73,31 @@ class Welcome extends Component<PropsType, StateType> {
       <div>
         {this.props.results.length > 0 ? (
           this.props.results.map((issue: any, index: number) => {
-            if (
-              this.props.token &&
-              this.props.user &&
-              issue.userId == this.props.user.id &&
-              !this.props.showYourIssues
-            ) {
-              return null;
-            }
+            // if (
+            //   this.props.token &&
+            //   this.props.user &&
+            //   issue.userId == this.props.user.id &&
+            //   !this.props.showYourIssues
+            // ) {
+            //   return null;
+            // }
             return (
               <Card color="light" className="issueCard">
                 <div className="issueSubtitle">
-                  <span>{`${issue.year ? issue.year : ""} ${issue.make} ${
-                    issue.model
-                  }`}</span>
                   <span>
-                    {this.props.showUser ? issue.user.name : null}{" "}
+                    {`${issue.year ? issue.year : ""} ${issue.make} ${
+                      issue.model
+                    } `}
+                  </span>
+                  <span className="date">
+                    {new Date(Date.parse(issue.createdAt)).toDateString()}
+                  </span>
+                  <span>
+                    {this.props.showUser
+                      ? issue.user
+                        ? issue.user.name
+                        : "User"
+                      : null}{" "}
                     {this.props.user ? (
                       issue.userId == this.props.user.id ? (
                         <>
@@ -167,44 +176,52 @@ class Welcome extends Component<PropsType, StateType> {
                       {issue.fixes.map((fix: any) => {
                         return (
                           <Card color="dark" className="fixCard">
-                            {fix.user.name}
-                            {this.props.user && fix.userId == this.props.user.id
-                              ? " (you)"
-                              : null}
-                            {this.props.user ? (
-                              fix.userId == this.props.user.id ? (
-                                <>
-                                  <EditFix
-                                    fetchResults={this.props.fetchResults}
-                                    token={this.props.token}
-                                    fix={fix.fix}
-                                    id={fix.id}
-                                  />
-                                  <DeleteFix
-                                    id={fix.id}
-                                    fix={fix.fix}
-                                    token={this.props.token}
-                                    user={this.props.user}
-                                  />
-                                </>
-                              ) : this.props.user && this.props.user.admin ? (
-                                <>
-                                  <AdminUpdateFix
-                                    id={fix.id}
-                                    fix={fix.fix}
-                                    token={this.props.token}
-                                    fetchResults={this.props.fetchResults}
-                                  />
-                                  <AdminDeleteFix
-                                    id={fix.id}
-                                    user={this.props.user}
-                                    token={this.props.token}
-                                    fix={fix.fix}
-                                  />
-                                </>
-                              ) : null
-                            ) : null}
-                            <CardBody>{fix.fix}</CardBody>
+                            <div className="fixSubtitle">
+                              <span>
+                                {fix.user ? fix.user.name : "User"}
+                                {this.props.user &&
+                                fix.userId == this.props.user.id
+                                  ? " (you)"
+                                  : null}
+                              </span>
+                              <span>
+                                {this.props.user ? (
+                                  fix.userId == this.props.user.id ? (
+                                    <>
+                                      <EditFix
+                                        fetchResults={this.props.fetchResults}
+                                        token={this.props.token}
+                                        fix={fix.fix}
+                                        id={fix.id}
+                                      />{" "}
+                                      <DeleteFix
+                                        id={fix.id}
+                                        fix={fix.fix}
+                                        token={this.props.token}
+                                        user={this.props.user}
+                                      />
+                                    </>
+                                  ) : this.props.user &&
+                                    this.props.user.admin ? (
+                                    <>
+                                      <AdminUpdateFix
+                                        id={fix.id}
+                                        fix={fix.fix}
+                                        token={this.props.token}
+                                        fetchResults={this.props.fetchResults}
+                                      />{" "}
+                                      <AdminDeleteFix
+                                        id={fix.id}
+                                        user={this.props.user}
+                                        token={this.props.token}
+                                        fix={fix.fix}
+                                      />
+                                    </>
+                                  ) : null
+                                ) : null}
+                              </span>
+                            </div>
+                            <p>{fix.fix}</p>
                           </Card>
                         );
                       })}

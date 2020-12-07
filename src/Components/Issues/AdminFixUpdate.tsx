@@ -77,6 +77,7 @@ class EditFix extends Component<PropsType, StateType> {
                   id="fixEditInput"
                   value={this.state.fix}
                   onChange={(e) => this.setState({ fix: e.target.value })}
+                  type="textarea"
                 />
               </FormGroup>
               <Button className="firstButton" type="submit" color="success">

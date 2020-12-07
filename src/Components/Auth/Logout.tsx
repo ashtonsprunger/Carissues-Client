@@ -14,7 +14,12 @@ class Logout extends Component<PropsType, StateType> {
 
   render() {
     return (
-      <a className="linkButton" onClick={this.props.deleteToken}>
+      <a
+        className="linkButton"
+        onClick={() => {
+          this.props.deleteToken();
+        }}
+      >
         Logout
       </a>
     );

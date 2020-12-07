@@ -24,6 +24,13 @@ class App extends Component<PropsType, StateType> {
     this.setToken = this.setToken.bind(this);
     this.getToken = this.getToken.bind(this);
     this.getUser = this.getUser.bind(this);
+    this.deleteUser = this.deleteUser.bind(this);
+  }
+
+  deleteUser() {
+    this.setState({ user: null });
+    console.log("******* DELETING USER *******");
+    console.log(this.state);
   }
 
   componentWillMount() {
@@ -79,6 +86,7 @@ class App extends Component<PropsType, StateType> {
                 user={this.state.user}
                 token={this.state.token}
                 setToken={this.setToken}
+                deleteUser={this.deleteUser}
               />
               <Issues user={this.state.user} token={this.state.token} />
             </div>

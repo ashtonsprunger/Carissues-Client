@@ -56,11 +56,11 @@ class Login extends Component<PropsType, StateType> {
             password: "",
           });
         } else {
-          alert("Incorrect username or password! 1");
+          alert("Incorrect username or password!");
         }
       })
       .then(this.props.fetchResults)
-      .catch(() => alert("Incorrect username or password! 2"));
+      .catch(() => alert("Incorrect username or password!"));
   }
 
   render() {

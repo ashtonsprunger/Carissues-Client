@@ -1,46 +1,23 @@
-# Getting Started with Create React App
+# Getting started with Carissues
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Carissues is a tool to help car buyers and owners research and post issues that you and other people have had with that car. You can find the site [HERE](https://findcarissues.herokuapp.com).
 
-## Available Scripts
+## Layout
 
-In the project directory, you can run:
+The left third of the screen is you account. It will show you the login status as well as the issues you've posted. The right two thirds of the screen is the main section. It is where you will spend most of your time.
 
-### `npm start`
+## Querying
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+At the very top of the page, there are two dropdowns, one to select the make of the car you would like to search for, and one to select the model. Select the make and model, the press the 'Search' botton. if you leave the make selector at '--All--', you will see all of the issues. if you select a make and leave the model selector at '--All--', you will see all of the issues for the given make regardless of the model.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Posting an Issue
 
-### `npm test`
+You must have an account to post. If you don't, click 'Register' and create one! Otherwise, login. Now click 'Post an issue'. fill out the make, model, and if you want, the year! Now, in the title section, write an overview of the issue. (most likely 3-10 words) Now in the issue section, describe your issue with great detail! This will help other people know if they have the solution or not. Click 'Post!' and you're done!
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Editing and Deleting
 
-### `npm run build`
+When logged in, your issues will have an 'edit', and 'delete' button. The 'edit' button allows you to edit the issue, pretty self explanatory. just change the fields if needed and press 'Update!'. Deleting is just a matter of pressing 'delete' and confirming it.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Fixes
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Fixes appear under the issues in a dropdown. To post just type a fix in the text box and press 'Post!'. The 'edit' and 'delete' buttons work the same as with the issues.

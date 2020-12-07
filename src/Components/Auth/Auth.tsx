@@ -10,6 +10,7 @@ type PropsType = {
   token: any;
   setToken: (token: string) => void;
   user: any;
+  deleteUser: () => void;
 };
 
 type StateType = {
@@ -31,6 +32,7 @@ class Auth extends Component<PropsType, StateType> {
   deleteToken() {
     this.props.setToken("");
     localStorage.clear();
+    this.props.deleteUser();
   }
 
   componentWillMount() {
